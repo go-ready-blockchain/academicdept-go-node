@@ -62,7 +62,7 @@ func callPlacementDeptVerification(name string, company string) {
 	if err != nil {
 		print(err)
 	}
-	resp, err := http.Post("http://placementdept-cluster2-jen-ci.devtools-dev.ext.devshift.net/verify-PlacementDept",
+	resp, err := http.Post("http://localhost:8084/verify-PlacementDept",
 		"application/json", bytes.NewBuffer(reqBody))
 	if err != nil {
 		print(err)
@@ -85,7 +85,7 @@ func callprintUsage(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	port := "8080"
+	port := "8083"
 	http.HandleFunc("/verify-AcademicDept", callverificationByAcademicDept)
 	http.HandleFunc("/usage", callprintUsage)
 	fmt.Printf("Server listening on localhost:%s\n", port)
