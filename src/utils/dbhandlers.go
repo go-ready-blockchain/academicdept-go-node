@@ -35,7 +35,7 @@ func StoreInBLOCKCHAIN(firstblockHASH []byte, firstblockbytes []byte) bool {
 
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 
@@ -77,7 +77,7 @@ func StoreLastHash(hash []byte) bool {
 
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 
@@ -119,7 +119,7 @@ func GetLastHash() []byte {
 
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 
@@ -162,7 +162,7 @@ func GetFromBLOCKCHAIN(hash []byte) []byte {
 	}
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 	//tableName = "BLockchain"
@@ -197,7 +197,7 @@ func GetStudentData(usn string) []byte {
 
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 	//tableName = "BLockchain"
@@ -239,7 +239,7 @@ func StoreInBuffer(block []byte, name string) {
 
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 
@@ -279,7 +279,7 @@ func FetchBlockFromBuffer(name string) []byte {
 
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 
@@ -315,7 +315,7 @@ func DeleteBlockFromBuffer(name string, company string) bool {
 	fmt.Println("hello i am deleting")
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 
@@ -348,7 +348,7 @@ func PutUserBytesIntoDB(ubytes []byte) bool {
 	}
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 	item := Item{}
@@ -388,7 +388,7 @@ func GetUserBytesFromDB(name string) []byte {
 	}
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 
@@ -427,7 +427,7 @@ func PutPublickeyIntoDB(publickeybytes []byte, name string) bool {
 	}
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 	item := Item{
@@ -467,7 +467,7 @@ func GetPublicKeyFromDB(name string) []byte {
 	}
 	sess, _ := session.NewSession(&aws.Config{
 
-		Region: aws.String("us-east-1"),
+		Region: aws.String("us-east-1"), DisableSSL : aws.Bool(true),
 	})
 	svc := dynamodb.New(sess)
 
