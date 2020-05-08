@@ -8,7 +8,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/jugalw13/academicdept-go-node/blockchain"
+	"github.com/go-ready-blockchain/blockchain-go-core/blockchain"
 )
 
 func printUsage() {
