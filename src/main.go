@@ -7,8 +7,10 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/go-ready-blockchain/blockchain-go-core/blockchain"
+	"github.com/go-ready-blockchain/blockchain-go-core/logger"
 )
 
 func printUsage() {
@@ -29,6 +31,11 @@ func verificationByAcademicDept(name string, company string) bool {
 }
 
 func callverificationByAcademicDept(w http.ResponseWriter, r *http.Request) {
+	name := time.Now().String()
+	logger.FileName = "Academic Verify" + name + ".log"
+	logger.NodeName = "Academic Node"
+	logger.CreateFile()
+
 	type jsonBody struct {
 		Name    string `json:"name"`
 		Company string `json:"company"`
@@ -46,6 +53,10 @@ func callverificationByAcademicDept(w http.ResponseWriter, r *http.Request) {
 	} else {
 		message = "Verification By Academic Dept Failed!"
 	}
+
+	logger.UploadToS3Bucket(logger.NodeName)
+
+	logger.DeleteFile()
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write([]byte(message))
