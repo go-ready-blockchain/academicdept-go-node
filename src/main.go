@@ -15,7 +15,7 @@ import (
 
 func printUsage() {
 	fmt.Println("Usage:")
-	fmt.Println("verify-AcademicDept -student USN \tAcademicDept Verifies Student's data")
+	fmt.Println("Make POST request to /verify-AcademicDept \tAcademicDept Verifies Student's data")
 }
 
 func verificationByAcademicDept(name string, company string) bool {
