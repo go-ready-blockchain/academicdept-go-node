@@ -7,10 +7,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"time"
+	"os"
+	
 
 	"github.com/go-ready-blockchain/blockchain-go-core/blockchain"
-	"github.com/go-ready-blockchain/blockchain-go-core/logger"
+	
 )
 
 func printUsage() {
@@ -31,10 +32,10 @@ func verificationByAcademicDept(name string, company string) bool {
 }
 
 func callverificationByAcademicDept(w http.ResponseWriter, r *http.Request) {
-	name := time.Now().String()
-	logger.FileName = "Academic Verify" + name + ".log"
-	logger.NodeName = "Academic Node"
-	logger.CreateFile()
+	//name := time.Now().String()
+	//logger.FileName = "Academic Verify" + name + ".log"
+	//logger.NodeName = "Academic Node"
+	//logger.CreateFile()
 
 	type jsonBody struct {
 		Name    string `json:"name"`
@@ -54,9 +55,9 @@ func callverificationByAcademicDept(w http.ResponseWriter, r *http.Request) {
 		message = "Verification By Academic Dept Failed!"
 	}
 
-	logger.UploadToS3Bucket(logger.NodeName)
+	//logger.UploadToS3Bucket(//logger.NodeName)
 
-	logger.DeleteFile()
+	//logger.DeleteFile()
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write([]byte(message))
@@ -73,7 +74,9 @@ func callPlacementDeptVerification(name string, company string) {
 	if err != nil {
 		print(err)
 	}
-	resp, err := http.Post("http://localhost:8084/verify-PlacementDept",
+	Apiurl := os.Getenv("PLACEMENT_URL")
+	Apiurl = Apiurl + "/verify-PlacementDept"
+	resp, err := http.Post(Apiurl,
 		"application/json", bytes.NewBuffer(reqBody))
 	if err != nil {
 		print(err)
@@ -96,7 +99,7 @@ func callprintUsage(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	port := "8083"
+	port := "8080"
 	http.HandleFunc("/verify-AcademicDept", callverificationByAcademicDept)
 	http.HandleFunc("/usage", callprintUsage)
 	fmt.Printf("Server listening on localhost:%s\n", port)
